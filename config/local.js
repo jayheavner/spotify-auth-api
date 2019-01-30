@@ -6,7 +6,11 @@ export default {
   spotifyAPI: 'https://api.spotify.com/v1/',
   spotifyAccountsAPI: 'https://accounts.spotify.com/',
 
+<<<<<<< HEAD
   clientID: '***************',
+=======
+  clientID: '1e53754af04249b8b8632e6f1e8bba1b',
+>>>>>>> 23ecc2cc1bdf09699fd336f905171ffaf49832c2
   clientSecret: '73c0295b5dcc4c3db59c62c45aa80fb3',
   redirectUri: 'http://localhost:4040/callback',
 
