@@ -1,6 +1,6 @@
 import local from './local';
 import prod from './prod';
-import spotify from './spotify.env';
+
 let config;
 
 switch (process.env.NODE_ENV) {
@@ -14,5 +14,4 @@ switch (process.env.NODE_ENV) {
 
 export default {
   ...config,
-  ...spotify
 }
