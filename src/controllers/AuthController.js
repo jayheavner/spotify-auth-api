@@ -14,75 +14,75 @@ const {
 
 const AuthController = {
 
-  sonos: function (req, res) {
-    console.log('sonos starting');
+  // sonos: function (req, res) {
+  //   console.log('sonos starting');
 
-    DeviceDiscovery((device1) => {
-      console.log('found device at ' + device.host)
+  //   DeviceDiscovery((device1) => {
+  //     console.log('found device at ' + device.host)
 
-      // mute every device...
-      device1.setMuted(true)
-        .then(`${device1.host} now muted`)
-    })
+  //     // mute every device...
+  //     device1.setMuted(true)
+  //       .then(`${device1.host} now muted`)
+  //   })
 
-    console.log('here');
+  //   console.log('here');
 
-    // const device = new Sonos('192.168.3.71');
+  //   // const device = new Sonos('192.168.3.71');
 
-    // device.getAllGroups().then(groups => {
-    //   //res.send(groups);
-    //   console.log('All groups %s', JSON.stringify(groups, null, 2))
-    // }).catch(err => {
-    //   console.warn('Error loading topology %s', err)
-    // })
+  //   // device.getAllGroups().then(groups => {
+  //   //   //res.send(groups);
+  //   //   console.log('All groups %s', JSON.stringify(groups, null, 2))
+  //   // }).catch(err => {
+  //   //   console.warn('Error loading topology %s', err)
+  //   // })
 
-    // device.zoneGroupTopologyService().GetZoneGroupAttributes().then(attributes => {
-    //   //res.send(attributes);
-    //   console.log('All Zone attributes %s', JSON.stringify(attributes, null, 2))
-    // }).catch(console.warn)
+  //   // device.zoneGroupTopologyService().GetZoneGroupAttributes().then(attributes => {
+  //   //   //res.send(attributes);
+  //   //   console.log('All Zone attributes %s', JSON.stringify(attributes, null, 2))
+  //   // }).catch(console.warn)
 
-    // device.getSpotifyConnectInfo().then(spotify => {
-    //   res.send(spotify);
-    // });
+  //   // device.getSpotifyConnectInfo().then(spotify => {
+  //   //   res.send(spotify);
+  //   // });
 
-    // device.pause()
-    //   .then(() => console.log('now playing'))
+  //   // device.pause()
+  //   //   .then(() => console.log('now playing'))
 
-    // find one device
-    DeviceDiscovery().once('DeviceAvailable', (device) => {
-      console.log('found device at ' + device.host)
+  //   // find one device
+  //   DeviceDiscovery().once('DeviceAvailable', (device) => {
+  //     console.log('found device at ' + device.host)
 
-      // get all groups
-      device.getAllGroups()
-        .then(console.log)
-    })
+  //     // get all groups
+  //     device.getAllGroups()
+  //       .then(console.log)
+  //   })
 
-    // device.currentTrack()
-    //   .then((t) =>
-    //     res.send(t)
-    //   );
+  //   // device.currentTrack()
+  //   //   .then((t) =>
+  //   //     res.send(t)
+  //   //   );
 
-    res.send('OK');
-    return;
+  //   res.send('OK');
+  //   return;
 
-    // event on all found...
-    DeviceDiscovery((device) => {
-      console.log('found device at ' + device.host)
+  //   // event on all found...
+  //   DeviceDiscovery((device) => {
+  //     console.log('found device at ' + device.host)
 
-      // mute every device...
-      device.setMuted(true)
-        .then(`${device.host} now muted`)
-    })
+  //     // mute every device...
+  //     device.setMuted(true)
+  //       .then(`${device.host} now muted`)
+  //   })
 
-    // find one device
-    DeviceDiscovery().once('DeviceAvailable', (device) => {
-      console.log('found device at ' + device.host)
+  //   // find one device
+  //   DeviceDiscovery().once('DeviceAvailable', (device) => {
+  //     console.log('found device at ' + device.host)
 
-      // get all groups
-      device.getAllGroups()
-        .then(console.log)
-    })
-  },
+  //     // get all groups
+  //     device.getAllGroups()
+  //       .then(console.log)
+  //   })
+  // },
 
   login: function (req, res) {
     var fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
@@ -236,11 +236,18 @@ const AuthController = {
       }
     });
   },
+  sonosHook: function (req, res) {
+    var fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
+    console.log(`  url > ${fullUrl}`);
+    console.log(req.body);
+    res.send(req.body);
+  },
 
   generic: function (req, res) {
     var fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
     console.log(`  url > ${fullUrl}`);
-    res.send(fullUrl);
+    console.log(req);
+    //console.log(req.body);
   }
 };
 

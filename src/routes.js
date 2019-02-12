@@ -11,6 +11,7 @@ export default function (app) {
   app.get('/callback', AuthController.callback);
   app.get('/refresh_token', AuthController.refreshToken);
   app.get('/refreshToken', AuthController.refreshToken);
-  app.get('/sonos', AuthController.sonos);
+  app.post('/sonos-hook', AuthController.sonosHook);
+  //app.get('/sonos', AuthController.sonos);
   app.get('*', AuthController.generic);
 };
