@@ -5,8 +5,85 @@ import config from './../../config'
 import utils from './../utils'
 
 require('dotenv').config();
+const {
+  DeviceDiscovery
+} = require('sonos')
+const {
+  Sonos
+} = require('sonos')
 
 const AuthController = {
+
+  sonos: function (req, res) {
+    console.log('sonos starting');
+
+    DeviceDiscovery((device1) => {
+      console.log('found device at ' + device.host)
+
+      // mute every device...
+      device1.setMuted(true)
+        .then(`${device1.host} now muted`)
+    })
+
+    console.log('here');
+
+    // const device = new Sonos('192.168.3.71');
+
+    // device.getAllGroups().then(groups => {
+    //   //res.send(groups);
+    //   console.log('All groups %s', JSON.stringify(groups, null, 2))
+    // }).catch(err => {
+    //   console.warn('Error loading topology %s', err)
+    // })
+
+    // device.zoneGroupTopologyService().GetZoneGroupAttributes().then(attributes => {
+    //   //res.send(attributes);
+    //   console.log('All Zone attributes %s', JSON.stringify(attributes, null, 2))
+    // }).catch(console.warn)
+
+    // device.getSpotifyConnectInfo().then(spotify => {
+    //   res.send(spotify);
+    // });
+
+    // device.pause()
+    //   .then(() => console.log('now playing'))
+
+    // find one device
+    DeviceDiscovery().once('DeviceAvailable', (device) => {
+      console.log('found device at ' + device.host)
+
+      // get all groups
+      device.getAllGroups()
+        .then(console.log)
+    })
+
+    // device.currentTrack()
+    //   .then((t) =>
+    //     res.send(t)
+    //   );
+
+    res.send('OK');
+    return;
+
+    // event on all found...
+    DeviceDiscovery((device) => {
+      console.log('found device at ' + device.host)
+
+      // mute every device...
+      device.setMuted(true)
+        .then(`${device.host} now muted`)
+    })
+
+    // find one device
+    DeviceDiscovery().once('DeviceAvailable', (device) => {
+      console.log('found device at ' + device.host)
+
+      // get all groups
+      device.getAllGroups()
+        .then(console.log)
+    })
+  },
+
   login: function (req, res) {
     var fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
 
@@ -144,9 +221,9 @@ const AuthController = {
 
     request.post(authOptions, function (error, response, body) {
       if (!error && response.statusCode === 200) {
-        console.log(body);
         const access_token = body.access_token;
         const expires_in = body.expires_in;
+
         res.redirect('http://localhost:8080/spotify/refresh_token?' +
           querystring.stringify({
             access_token,
@@ -158,6 +235,12 @@ const AuthController = {
         // });
       }
     });
+  },
+
+  generic: function (req, res) {
+    var fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
+    console.log(`  url > ${fullUrl}`);
+    res.send(fullUrl);
   }
 };
 
