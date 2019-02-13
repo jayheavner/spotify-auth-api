@@ -1,53 +1,68 @@
 import mqtt from 'mqtt';
-import mqttEmitter from 'mqtt-emitter';
 
-var events = new mqttEmitter();
+var mqttOptions = {
+  username: process.env.MQTT_USERNAME,
+  password: process.env.MQTT_PASSWORD
+};
 
-var MQTTService = (function () {
-  var instance;
+const client = mqtt.connect(process.env.MQTT_SERVER, mqttOptions);
 
-  function init() {
-    const server = process.env.MQTT_SERVER;
 
-    var mqttOptions = {
-      username: process.env.MQTT_USERNAME,
-      password: process.env.MQTT_PASSWORD
-    };
+client.publish('presence', 'bin hier')
+client.on('message', function (topic, message) {
+  console.log(message)
+})
+client.end()
+// import mqtt from 'mqtt';
+// import mqttEmitter from 'mqtt-emitter';
 
-    var client = mqtt.connect(server, mqttOptions);
-    console.log(`server > ${server} and creds > ${JSON.stringify(mqttOptions)}`);
-    client.on('connect', function (err) {
-      client.subscribe('music/sonos/event', function (err) {
-        //client.publish('music', 'Hello mqtt')
-      });
-    });
+// var events = new mqttEmitter();
 
-    client.on('message', function (topic, message) {
-      console.log('Received mqtt message > ' + topic + '---' + message);
-      events.emit(topic, message);
-    });
+// var MQTTService = (function () {
+//   var instance;
 
-    // public methods
-    return {
-      publish: (topic, msg) => {
-        console.log('publishing ' + msg + ' to ' + topic);
-        client.publish(topic, msg);
-      },
-      subscribe: (topic, method) => {
-        events.on(topic, method);
-      }
-    };
-  }
+//   function init() {
+//     const server = process.env.MQTT_SERVER;
 
-  return {
-    getInstance: function () {
-      if (!instance) {
-        instance = init();
-      }
-      return instance;
-    }
-  };
+//     var mqttOptions = {
+//       username: process.env.MQTT_USERNAME,
+//       password: process.env.MQTT_PASSWORD
+//     };
 
-})();
+//     var client = mqtt.connect(server, mqttOptions);
+//     console.log(`server > ${server} and creds > ${JSON.stringify(mqttOptions)}`);
+//     client.on('connect', function (err) {
+//       client.subscribe('music/sonos/event', function (err) {
+//         //client.publish('music', 'Hello mqtt')
+//       });
+//     });
 
-export default MQTTService;
+//     client.on('message', function (topic, message) {
+//       console.log('Received mqtt message > ' + topic + '---' + message);
+//       events.emit(topic, message);
+//     });
+
+//     // public methods
+//     return {
+//       publish: (topic, msg) => {
+//         console.log('publishing ' + msg + ' to ' + topic);
+//         client.publish(topic, msg);
+//       },
+//       subscribe: (topic, method) => {
+//         events.on(topic, method);
+//       }
+//     };
+//   }
+
+//   return {
+//     getInstance: function () {
+//       if (!instance) {
+//         instance = init();
+//       }
+//       return instance;
+//     }
+//   };
+
+// })();
+
+// export default MQTTService;
