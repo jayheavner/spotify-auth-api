@@ -1,4 +1,5 @@
-import AuthController from './controllers/AuthController'
+import AuthController from './controllers/AuthController';
+import SonosController from './controllers/SonosController';
 
 export default function (app) {
   app.get('/', function (req, res) {
@@ -11,7 +12,7 @@ export default function (app) {
   app.get('/callback', AuthController.callback);
   app.get('/refresh_token', AuthController.refreshToken);
   app.get('/refreshToken', AuthController.refreshToken);
-  app.post('/sonos-hook', AuthController.sonosHook);
+  app.post('/sonos-hook', SonosController.sonosHook);
   //app.get('/sonos', AuthController.sonos);
   app.get('*', AuthController.generic);
 };

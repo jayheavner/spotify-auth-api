@@ -88,18 +88,15 @@ const AuthController = {
     var fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
 
     console.log("----------------------------------");
-    console.log("      /login");
-    console.log(`      ${new Date()} `);
-    console.log("----------------------------------");
-
-    console.log("----------------------------------");
-    console.log(" url");
-    console.log(fullUrl);
+    console.log("/login");
+    console.log(`${new Date()} `);
+    console.log(`url >${fullUrl}`);
     console.log("----------------------------------");
 
     const state = utils.generateRandomString(16);
 
     console.log(`spotify clientId => ${process.env.clientId}`);
+    console.log(`spotify clientSecret => ${process.env.clientSecret}`);
 
     const url = config.spotifyAccountsAPI + 'authorize?' +
       querystring.stringify({
@@ -122,11 +119,8 @@ const AuthController = {
     var fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
     console.log("----------------------------------");
     console.log("      IN CALLBACK");
-    console.log("----------------------------------");
-    console.log("----------------------------------");
-    console.log("----------------------------------");
-    console.log(`        ${fullUrl}`);
-    console.log("----------------------------------");
+    console.log('');
+    console.log(`${fullUrl}`);
     console.log("----------------------------------");
     const code = req.query.code || null;
     const state = req.query.state || null;
@@ -238,15 +232,16 @@ const AuthController = {
   },
   sonosHook: function (req, res) {
     var fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
-    console.log(`  url > ${fullUrl}`);
-    console.log(req.body);
+    //console.log(`  url > ${fullUrl}`);
+    //console.log(req.body);
     res.send(req.body);
   },
 
   generic: function (req, res) {
+    console.log('GENERIC');
     var fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
     console.log(`  url > ${fullUrl}`);
-    console.log(req);
+    //console.log(req);
     //console.log(req.body);
   }
 };
