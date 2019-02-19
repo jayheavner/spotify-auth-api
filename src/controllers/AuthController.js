@@ -160,14 +160,14 @@ const AuthController = {
           console.log(` redirecting to > ${config.clientURL}`);
           console.log("----------------------------------");
 
-          res.redirect('http://localhost:8080/spotify/callback?' +
+          res.redirect('http://localhost:8050/spotify/callback?' +
             querystring.stringify({
               access_token,
               refresh_token,
               expires_in
             }));
 
-          // res.redirect('http://localhost:8080/spotify/callback?' +
+          // res.redirect('http://localhost:8081/spotify/callback?' +
           //   querystring.stringify({
           //     access_token: access_token,
           //     refresh_token: refresh_token,
@@ -218,7 +218,7 @@ const AuthController = {
         const access_token = body.access_token;
         const expires_in = body.expires_in;
 
-        res.redirect('http://localhost:8080/spotify/refresh_token?' +
+        res.redirect('http://localhost:8050/spotify/refresh_token?' +
           querystring.stringify({
             access_token,
             expires_in
