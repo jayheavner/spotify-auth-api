@@ -21,10 +21,6 @@ const AuthController = {
   },
 
   callback: function (req, res) {
-    console.log("----------------------------------");
-    console.log("      IN CALLBACK");
-    console.log("----------------------------------");
-
     const code = req.query.code || null;
     const state = req.query.state || null;
 
@@ -55,13 +51,6 @@ const AuthController = {
             refresh_token,
             expires_in
           } = body;
-
-          console.log("----------------------------------");
-          console.log(` access_token > ${access_token}`);
-          console.log("----------------------------------");
-          console.log("----------------------------------");
-          console.log(` redirecting to > ${config.clientURL}`);
-          console.log("----------------------------------");
 
           res.redirect(config.clientURL + '#/login?' +
             querystring.stringify({
