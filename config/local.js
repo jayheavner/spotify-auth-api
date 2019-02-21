@@ -1,7 +1,7 @@
 export default {
   port: 4040,
 
-  clientURL: 'http://localhost:8050/',
+  clientURL: 'http://localhost:8080/',
 
   spotifyAPI: 'https://api.spotify.com/v1/',
   spotifyAccountsAPI: 'https://accounts.spotify.com/',
